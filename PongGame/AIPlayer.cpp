@@ -1,4 +1,5 @@
 #include "AIPlayer.h"
+#include "Game.h"
 
 const float AIPlayer::deltaY()
 {
@@ -11,10 +12,6 @@ void AIPlayer::update(SDL_Renderer* renderer, PongBall ball)
 		IMPROVE LOGIC SO THAT THE AI MOVES TOWARDS WHERE THE BALL IS GOING
 		CURRENTLY FAILS TO DEAL WITH STEEP VERTICAL MOVEMENT OF THE BALL
 	*/
-	SDL_Rect darea;
-	SDL_RenderGetViewport(renderer, &darea);
-	const int WINDOW_HEIGHT = darea.h;
-
 	auto a = (getPositionX() - ball.getCenterX()) / ball.getSpeedX();
 	auto py = a * ball.getSpeedY() + ball.getCenterY();
 
@@ -30,15 +27,15 @@ void AIPlayer::update(SDL_Renderer* renderer, PongBall ball)
 		py = a * - ball.getSpeedY();
 		
 	}
-	else if (py > WINDOW_HEIGHT)
+	else if (py > Game::getWindowHeight())
 	{
 		// FIND X VALUE WHERE Y = WINDOW_HEIGHT
-		a = (WINDOW_HEIGHT - ball.getCenterY()) / ball.getSpeedY(); // a is distance travelled when y = WINDOW_HEIGHT
+		a = (Game::getWindowHeight() - ball.getCenterY()) / ball.getSpeedY(); // a is distance travelled when y = WINDOW_HEIGHT
 
 		auto px = a * ball.getSpeedX() + ball.getCenterX(); // point where ball bounces given by (px, WINDOW_HEIGHT)
 
 		a = (px - ball.getCenterX()) / ball.getSpeedX();
-		py = a * -ball.getSpeedY() + WINDOW_HEIGHT;
+		py = a * -ball.getSpeedY() + Game::getWindowHeight();
 	}
 
 	/* line of ball given by 

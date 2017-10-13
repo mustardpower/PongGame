@@ -23,6 +23,8 @@ private:
 	SDL_Window* window;
 	const int WINNING_SCORE = 11;
 	const int NUMBER_OF_MENU_CHOICES = 2;
+	static const int WINDOW_HEIGHT;
+	static const int WINDOW_WIDTH;
 
 public:
 	Game();
@@ -31,6 +33,8 @@ public:
 	void handleEvents();
 	void initialize();
 	bool isColliding(Player player);
+	static const int getWindowWidth();
+	static const int getWindowHeight();
 	void handleGameEvent(SDL_Event anEvent);
 	void handleMenuEvent(SDL_Event anEvent);
 	void render();

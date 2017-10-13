@@ -4,6 +4,9 @@
 #include <string>
 #include <algorithm>
 
+const int Game::WINDOW_WIDTH = 640;
+const int Game::WINDOW_HEIGHT = 480;
+
 Game::Game()
 {
 	players[0].reset(new Player());
@@ -43,6 +46,16 @@ void Game::checkScore()
 	{
 		gameState = EndOfGame;
 	}
+}
+
+const int Game::getWindowHeight()
+{
+	return WINDOW_HEIGHT;
+}
+
+const int Game::getWindowWidth()
+{
+	return WINDOW_WIDTH;
 }
 
 void Game::handleEvents()
