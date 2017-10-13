@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Game.h"
 
 Player::Player()
 {
@@ -9,7 +10,6 @@ Player::Player()
 
 Player::~Player()
 {
-	int a = 4;
 }
 
 const float Player::deltaY()
@@ -70,12 +70,18 @@ bool Player::onLeftOfBall(SDL_Renderer* renderer, PongBall ball) const
 
 void Player::moveDown()
 {
-	positionY += deltaY();
+	if (positionY + deltaY() < Game::getWindowHeight())
+	{
+		positionY += deltaY(); 
+	}
 }
 
 void Player::moveUp()
 {
-	positionY -= deltaY();
+	if (positionY + deltaY() > 0)
+	{
+		positionY -= deltaY();
+	}
 }
 
 void Player::resetScore()
